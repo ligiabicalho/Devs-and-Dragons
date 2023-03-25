@@ -88,4 +88,8 @@ export default class Character implements Fighter {
   get maxLifePoints(): number {
     return this._maxLifePoints;
   }
+
+  get name(): string {
+    return this._name;
+  }
 }
