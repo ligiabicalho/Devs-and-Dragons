@@ -2,7 +2,7 @@ import Archetype, { Mage,
   Necromancer, 
   Ranger, 
   Warrior,
-  archetypeTypes } from './Archetypes';
+  ArchetypeTypes } from './Archetypes';
 import Energy from './Energy';
 import Fighter, { SimpleFighter } from './Fighter';
 import Race, { Elf, Dwarf, Orc, Halfling, RaceTypes } from './Races';
@@ -21,7 +21,7 @@ export default class Character implements Fighter {
   constructor(
     private _name: string, 
     private raceType?: RaceTypes,
-    private archetypeType?: archetypeTypes,
+    private archetypeType?: ArchetypeTypes,
   ) {
     this._dexterity = getRandomInt(1, 10);
     this._race = this.setRace(raceType);
@@ -51,7 +51,7 @@ export default class Character implements Fighter {
     }
   }
 
-  setArchetype(archetypeType: archetypeTypes = 'Mage'): Archetype {
+  setArchetype(archetypeType: ArchetypeTypes = 'Mage'): Archetype {
     switch (archetypeType) {
       case 'Necromancer':
         return new Necromancer(this._name);

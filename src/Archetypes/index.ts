@@ -4,7 +4,7 @@ import Necromancer from './Necromancer';
 import Warrior from './Warrior';
 import Ranger from './Ranger';
 
-type archetypeTypes = 'Mage' | 'Necromancer' | 'Warrior' | 'Ranger';
+type ArchetypeTypes = 'Mage' | 'Necromancer' | 'Warrior' | 'Ranger';
 
 export default Archetype;
-export { Mage, Necromancer, Warrior, Ranger, archetypeTypes };
+export { Mage, Necromancer, Warrior, Ranger, ArchetypeTypes };
