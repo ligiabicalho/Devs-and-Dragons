@@ -14,7 +14,7 @@ export default class PVP extends Battle {
   }
 
   fight(): number {
-    // neste caso, evita chutar cachorro morto ^^'
+    // neste caso apenas while, evita chutar cachorro morto ^^'
     while (this.player1.lifePoints > 0 && this.player2.lifePoints > 0) {
       this.player1.attack(this.player2);
       this.player2.attack(this.player1);

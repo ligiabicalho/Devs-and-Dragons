@@ -40,7 +40,7 @@ export default class Character implements Fighter {
   }
   
   attack(enemy: Fighter | SimpleFighter): void {
-    enemy.receiveDamage(this.strength);
+    enemy.receiveDamage(this._strength);
   } 
   
   levelUp(): void {
