@@ -1,7 +1,11 @@
-import Archetype, { Mage } from './Archetypes';
+import Archetype, { Mage, 
+  Necromancer, 
+  Ranger, 
+  Warrior,
+  archetypeTypes } from './Archetypes';
 import Energy from './Energy';
 import Fighter, { SimpleFighter } from './Fighter';
-import Race, { Elf } from './Races';
+import Race, { Elf, Dwarf, Orc, Halfling, RaceTypes } from './Races';
 import getRandomInt from './utils';
 
 export default class Character implements Fighter {
@@ -14,10 +18,16 @@ export default class Character implements Fighter {
   private _energy: Energy;
   private _lifePoints: number; // como ser readonly e ter q alterar em receiveDamage?
 
-  constructor(private _name: string) {
+  constructor(
+    private _name: string, 
+    private raceType?: RaceTypes,
+    private archetypeType?: archetypeTypes,
+  ) {
     this._dexterity = getRandomInt(1, 10);
-    this._race = new Elf(this._name, this._dexterity);
-    this._archetype = new Mage(this._name);
+    this._race = this.setRace(raceType);
+    // this._race = new raceChoice(this._name, this._dexterity);
+    this._archetype = this.setArchetype(archetypeType);
+    // this._archetype = new Mage(this._name);
     this._maxLifePoints = (this._race.maxLifePoints / 2);
     this._lifePoints = this._maxLifePoints;
     this._strength = getRandomInt(1, 10);
@@ -26,6 +36,32 @@ export default class Character implements Fighter {
       type_: this._archetype.energyType,
       amount: getRandomInt(1, 10),
     };
+  }
+
+  setRace(raceType: RaceTypes = 'Elf'): Race {
+    switch (raceType) {
+      case 'Dwarf':
+        return new Dwarf(this._name, this._dexterity);
+      case 'Halfling':
+        return new Halfling(this._name, this._dexterity);
+      case 'Orc':
+        return new Orc(this._name, this._dexterity);
+      default:
+        return new Elf(this._name, this._dexterity);
+    }
+  }
+
+  setArchetype(archetypeType: archetypeTypes = 'Mage'): Archetype {
+    switch (archetypeType) {
+      case 'Necromancer':
+        return new Necromancer(this._name);
+      case 'Ranger':
+        return new Ranger(this._name);
+      case 'Warrior':
+        return new Warrior(this._name);
+      default:
+        return new Mage(this._name);
+    }
   }
 
   receiveDamage(attackPoints: number): number {

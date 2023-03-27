@@ -11,12 +11,10 @@ export default class PVE extends Battle {
 
   fight(): number {
     // luta contra monster 1, dps contra monster 2...
-    this.monsters.forEach((monster, index) => {
+    this.monsters.forEach((monster) => {
       while (this.player.lifePoints > 0 && monster.lifePoints > 0) {
         this.player.attack(monster);
         monster.attack(this.player);
-        console.log('player', index, this.player.lifePoints);
-        // console.log('monster', index, monster.lifePoints);
       }
     });
       
