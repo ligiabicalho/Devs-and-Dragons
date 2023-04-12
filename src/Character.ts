@@ -24,10 +24,10 @@ export default class Character implements Fighter {
     private archetypeType?: ArchetypeTypes,
   ) {
     this._dexterity = getRandomInt(1, 10);
-    this._race = this.setRace(raceType);
-    // this._race = new raceChoice(this._name, this._dexterity);
-    this._archetype = this.setArchetype(archetypeType);
+    // this._race = new Elf(this._name, this._dexterity); 
     // this._archetype = new Mage(this._name);
+    this._race = this.setRace(raceType);
+    this._archetype = this.setArchetype(archetypeType);
     this._maxLifePoints = (this._race.maxLifePoints / 2);
     this._lifePoints = this._maxLifePoints;
     this._strength = getRandomInt(1, 10);
@@ -39,29 +39,23 @@ export default class Character implements Fighter {
   }
 
   setRace(raceType: RaceTypes = 'Elf'): Race {
-    switch (raceType) {
-      case 'Dwarf':
-        return new Dwarf(this._name, this._dexterity);
-      case 'Halfling':
-        return new Halfling(this._name, this._dexterity);
-      case 'Orc':
-        return new Orc(this._name, this._dexterity);
-      default:
-        return new Elf(this._name, this._dexterity);
-    }
+    const raceTypeClass = {
+      Dwarf, 
+      Elf, 
+      Halfling, 
+      Orc,
+    };
+    return new raceTypeClass[raceType](this._name, this._dexterity);
   }
 
   setArchetype(archetypeType: ArchetypeTypes = 'Mage'): Archetype {
-    switch (archetypeType) {
-      case 'Necromancer':
-        return new Necromancer(this._name);
-      case 'Ranger':
-        return new Ranger(this._name);
-      case 'Warrior':
-        return new Warrior(this._name);
-      default:
-        return new Mage(this._name);
-    }
+    const archetypeClass = { 
+      Necromancer, 
+      Ranger, 
+      Warrior, 
+      Mage, 
+    };
+    return new archetypeClass[archetypeType](this._name);
   }
 
   receiveDamage(attackPoints: number): number {
